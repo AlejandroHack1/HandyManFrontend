@@ -1,0 +1,68 @@
+<div>
+    <a style="margin-left: 15px;" routerLink="/home">Back</a>
+</div>
+
+<div class="container float-right">
+    <br />
+    <legend>Modulo Registro Reporte de Servicio</legend><br />
+    <div class="row">
+        <div class="col col-md-8" style="max-height: 100vh">
+            <form [formGroup]="reportForm" (ngSubmit)="save()">
+                <div class="mb-3">
+                    <label for="idTecnico" class="form-label">Identificación Técnico</label>
+                    <input type="text" class="form-control" id="idTecnico" formControlName="idTecnico"
+                        [ngClass]="{ 'is-invalid': submitted && f['idTecnico'].errors }" />
+                    <div *ngIf="submitted && f['idTecnico'].errors" class="invalid-feedback">
+                        <div *ngIf="f['idTecnico'].errors['required']">Identificación Técnico es Requerido</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="idServicio" class="form-label">Identificación Servicio</label>
+                    <input type="text" class="form-control" id="idServicio" formControlName="idServicio"
+                        [ngClass]="{ 'is-invalid': submitted && f['idServicio'].errors }" />
+                    <div *ngIf="submitted && f['idServicio'].errors" class="invalid-feedback">
+                        <div *ngIf="f['idServicio'].errors['required']">Identificación del servicio es Requerido</div>
+
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <mat-form-field>
+                        <input matInput type="datetime-local" placeholder="Fecha de Inicio" class="form-control"
+                            id="fInicio" formControlName="fInicio"
+                            [ngClass]="{ 'is-invalid': submitted && f['fInicio'].errors }" />
+                        <div *ngIf="submitted && f['fInicio'].errors" class="invalid-feedback">
+                            <div *ngIf="f['fInicio'].errors['required']">Fecha de Inicio es Requerido
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+                <div class="mb-3">
+                    <mat-form-field>
+                        <input matInput type="datetime-local" placeholder="Fecha Fin" class="form-control" id="fechaFin"
+                            formControlName="fFin"
+                            [ngClass]="{ 'is-invalid': submitted && f['fFin'].errors }" />
+                        <div *ngIf="submitted && f['fFin'].errors" class="invalid-feedback">
+                            <div *ngIf="f['fFin'].errors['required']">Fecha de Fin es Requerido
+                            </div>
+                            <div *ngIf="f['fFin'].errors['date']">
+                                Fecha y hora fin no puede ser menor a fecha inicio
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="button" (click)="onReset()" class="btn btn-warning" style="margin-left: 10px;" >
+                    Restablecer
+                </button>
+            </form>
+        </div>
+
+    </div>
+    <div class="col col-md-4">
+        <div style="position: fixed">{{ datos }}</div>
+    </div>
+</div>

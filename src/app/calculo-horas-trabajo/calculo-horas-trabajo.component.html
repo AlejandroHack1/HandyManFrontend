@@ -1,0 +1,93 @@
+<div>
+    <a style="margin-left: 15px;" routerLink="/home">Back</a>
+</div>
+
+<div class="container float-right">
+    <br />
+    <legend>Modulo Calcular Horas de Trabajo</legend><br />
+    <div class="row">
+        <div class="col col-md-8" style="max-height: 100vh">
+            <form [formGroup]="calculateHoursForm" (ngSubmit)="search()">
+                <div class="mb-3">
+                    <label for="idTecnico" class="form-label">Identificación Técnico</label>
+                    <input type="text" class="form-control" id="idTecnico" formControlName="idTecnico"
+                        [ngClass]="{ 'is-invalid': submitted && f['idTecnico'].errors }" />
+                    <div *ngIf="submitted && f['idTecnico'].errors" class="invalid-feedback">
+                        <div *ngIf="f['idTecnico'].errors['required']">Identificación Técnico es Requerido</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="semanas" class="form-label">Número de la semana</label>
+                    <input type="text" class="form-control" id="semanas" formControlName="semanas"
+                        [ngClass]="{ 'is-invalid': submitted && f['semanas'].errors }" />
+                    <div *ngIf="submitted && f['semanas'].errors" class="invalid-feedback">
+                        <div *ngIf="f['semanas'].errors['required']">Número de la semana es Requerido
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Consultar</button>
+                <button type="button" (click)="onReset()" class="btn btn-warning" style="margin-left: 10px;">
+                    Restablecer
+                </button>
+            </form>
+        </div>
+
+    </div><br /><br />
+
+    <div *ngIf="submitted && Service == null">
+        <h1>No se encontro técnico con el id: {{calculateHoursForm.value.idTecnico}}</h1>
+    </div>
+
+    <div *ngIf="submitted && Calculo == null">
+        <h1>No hay registros para la semana: {{calculateHoursForm.value.semanas}}</h1>
+    </div>
+
+    <div class="col col-md-12">
+        <h3 class="mb-3 text-center">Calculo Horas</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Servicio</th>
+                    <th scope="col">Inicio</th>
+                    <th scope="col">Fin</th>
+                    <th scope="col">Horas normales:</th>
+                    <th scope="col">Horas nocturnas:</th>
+                    <th scope="col">Horas Dominicales:</th>
+                    <th scope="col">Horas Normales Extra:</th>
+                    <th scope="col">Horas nocturnas Extra:</th>
+                    <th scope="col">Horas Dominicales Extra:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="submitted && Service != null && Calculo != null">
+                    <td>{{ Service.idTecnico }}</td>
+                    <td>{{ Service.idServicio }}</td>
+                    <td>{{ Service.fInicio }}</td>
+                    <td>{{ Service.fFin }}</td>
+                    <td>{{ Calculo.hNormales }}</td>
+                    <td>{{ Calculo.hNocturnas }}</td>
+                    <td>{{ Calculo.hDominicales }}</td>
+                    <td>{{ Calculo.hNormalesExtras }}</td>
+                    <td>{{ Calculo.hNocturnasExtras }}</td>
+                    <td>{{ Calculo.hDominicalesExtras }}</td>
+                </tr>
+
+                <tr *ngIf="submitted && Service == null">
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
