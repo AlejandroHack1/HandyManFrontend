@@ -1,5 +1,13 @@
 # HandyManFrontend
 
+Frontend:
+- Formulario donde se pueda diligenciar la identificación del técnico y el número de la
+semana.
+- Presentación de resultados una vez el backend responda con el cálculo de horas
+para el cliente.
+
+![image](https://github.com/AlejandroHack1/HandyManFrontend/assets/17314013/b079341d-a415-4d7a-98fe-36af71d45d70)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
 ## Development server
